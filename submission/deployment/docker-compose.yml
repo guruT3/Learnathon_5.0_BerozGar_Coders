@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile
+    container_name: hostel_grievance_app
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - REQUIRE_HTTPS=true
+      - TRUST_PROXY=true
+      - ALLOWED_ORIGINS=https://hostel.university.edu
+      - ALLOWED_HOSTS=hostel.university.edu,localhost
+    volumes:
+      - app_data:/app/data
+      - app_uploads:/app/uploads
+    networks:
+      - app_network
+    expose:
+      - "3001"
+
+  nginx:
+    image: nginx:alpine
+    container_name: hostel_grievance_proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    depends_on:
+      - app
+    networks:
+      - app_network
+
+volumes:
+  app_data:
+  app_uploads:
+
+networks:
+  app_network:
+    driver: bridge
