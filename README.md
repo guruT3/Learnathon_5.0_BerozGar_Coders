@@ -36,7 +36,7 @@ npm install
 # 2. Seed the database (3 students, 1 warden, 8 grievances)
 npm run db:reset
 
-# 3. Run frontend + API together
+ 3. Run frontend + API together
 npm run dev:all
 
 Open the URL Vite prints (usually http://localhost:5173). The Hono API runs at http://127.0.0.1:3001.
@@ -56,7 +56,7 @@ npm test            # vitest
 Every finding below was explained, fixed in source, and re-verified — not just flagged by a scanner. Full writeups live in SECURITY.md / HARDENING.md.
 
 🔴 Critical
-#	Finding	Fix
+	Finding	Fix
 1	IDOR on grievances & attachments — any logged-in student could read/modify/download any grievance or attachment by guessing an ID	Enforced assertCanViewGrievance() ownership checks on every grievance and attachment route
 2	Directory traversal via attachment filenames — crafted filenames could escape the upload directory	Storage now always writes to server-generated, random filenames; original names kept as metadata only
 🟠 High
