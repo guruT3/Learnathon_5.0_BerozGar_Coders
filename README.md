@@ -69,7 +69,7 @@ Every finding below was explained, fixed in source, and re-verified — not just
 8	No rate limiting on login	Login now rate-limited to blunt brute-force / credential-stuffing attempts
 9	Plaintext session tokens stored in DB	Tokens hashed server-side before storage; only the hash is ever persisted
 🟡 Medium
-#	Finding	Fix
+	Finding	Fix
 10	Broken authorization on comment endpoints	Comment read/write routes now re-check grievance ownership
 11	Students could tamper with grievance status	Status-mutation endpoints now role-gated to wardens
 12	Race conditions / predictable ID generation	Switched to collision-safe ID generation
